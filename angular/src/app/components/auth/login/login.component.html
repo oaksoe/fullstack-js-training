@@ -1,0 +1,18 @@
+<h1>First Section</h1>
+<p>
+    Hi {{ user.fullName }} !  
+</p>
+
+<h1>Second Section</h1>
+<div>
+    <input placeholder="Username" [(ngModel)]="user.username">
+    <input type="password" placeholder="Password" [(ngModel)]="user.password">
+</div>
+<br>
+<h1>Third Section</h1>
+<div>
+    Username: {{ user.username }}
+    Password: {{ user.password }}
+</div>
+
+

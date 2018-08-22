@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { User } from '../../../models/user.model';
 
 @Component({
@@ -17,18 +18,30 @@ export class LoginComponent implements OnInit {
     @Output() 
     public toggleAuthClick = new EventEmitter<boolean>();
 
-    constructor() {
+    public loginForm: FormGroup;
+
+    constructor(
+        private formBuilder: FormBuilder
+    ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.initLoginForm();
     }
 
-    onLoginClick() {
+    public onLoginClick() {
         this.loginClick.emit();
     }
 
-    goToSignup() {
+    public goToSignup() {
         this.toggleAuthClick.emit(false);
+    }
+
+    private initLoginForm() {
+        this.loginForm = this.formBuilder.group({
+            usernameControl: ['', [Validators.required]],
+            passwordControl: ['', [Validators.required]]
+        });
     }
 }
 

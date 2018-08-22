@@ -1,0 +1,8 @@
+<div>
+  <input placeholder="Username" [(ngModel)]="user.username">
+  <input type="password" placeholder="Password" [(ngModel)]="user.password">
+  <input placeholder="Full Name" [(ngModel)]="user.fullName">
+  <input placeholder="Address" [(ngModel)]="user.address">
+  <button (click)="onSignupClick()">Sign Up</button>
+  <a class="auth-link" (click)="goToLogin()">Login</a>
+</div>

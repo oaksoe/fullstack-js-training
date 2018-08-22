@@ -2,17 +2,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../models/user.model';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
     @Input()
     public user: User;
 
     @Output() 
-    public loginClick = new EventEmitter();
+    public signupClick = new EventEmitter();
 
     @Output() 
     public toggleAuthClick = new EventEmitter<boolean>();
@@ -23,13 +23,11 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
-    onLoginClick() {
-        this.loginClick.emit();
+    onSignupClick() {
+        this.signupClick.emit();
     }
 
-    goToSignup() {
-        this.toggleAuthClick.emit(false);
+    goToLogin() {
+        this.toggleAuthClick.emit(true);
     }
 }
-
-

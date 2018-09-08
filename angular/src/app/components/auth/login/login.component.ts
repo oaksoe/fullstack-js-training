@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { User } from '../../../models/user.model';
+import { User } from '../../../models';
 
 @Component({
     selector: 'app-login',
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
     private initLoginForm() {
         this.loginForm = this.formBuilder.group({
-            usernameControl: ['', [Validators.required]],
+            emailControl: ['', [Validators.required]],
             passwordControl: ['', [Validators.required]]
         });
     }

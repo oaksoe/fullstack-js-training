@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { User } from '../../../models/user.model';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '../../../models';
+import { ValidatorService, LocationService } from '../../../services';
 
 @Component({
     selector: 'app-signup',
@@ -17,17 +19,52 @@ export class SignupComponent implements OnInit {
     @Output() 
     public toggleAuthClick = new EventEmitter<boolean>();
 
-    constructor() {
+    public signupForm: FormGroup;
+    public countryList = [];
+    public cityList = [];
+    
+    constructor(
+        private formBuilder: FormBuilder,
+        private validatorService: ValidatorService,
+        private locationService: LocationService
+    ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.initSignupForm();
     }
 
-    onSignupClick() {
+    public onSignupClick() {
         this.signupClick.emit();
     }
 
-    goToLogin() {
+    public goToLogin() {
         this.toggleAuthClick.emit(true);
+    }
+
+    public onCountrySelected() {
+        this.cityList = this.locationService.getCityList(this.user.country);
+    }
+
+    private initSignupForm() {
+        this.countryList = this.locationService.getCountryList();
+        this.cityList = this.locationService.getCityList(this.countryList[0]);
+
+        this.signupForm = this.formBuilder.group({
+            emailControl: ['', [Validators.required, Validators.email]],
+            passwordControl: ['', [Validators.required, this.validatorService.validatePasswordStrength]],
+            passwordControl2: ['', [Validators.required, (control: FormControl) => {
+                return this.validatorService.validatePasswordMatch(control, this.user.password);
+            }]],
+            fullNameControl: ['', [Validators.required]],
+            dobControl: ['', [Validators.required, this.validatorService.validateDOB]],
+            addressControl: ['', [Validators.required]],
+            phoneControl: ['', [Validators.required, this.validatorService.validatePhone]],
+        });
+
+        this.signupForm.controls.passwordControl.valueChanges
+            .subscribe(() => {
+                this.signupForm.controls.passwordControl2.updateValueAndValidity();
+            });
     }
 }

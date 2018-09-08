@@ -5,28 +5,45 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
+import { 
+    LoginComponent,
+    SignupComponent 
+} from './components';
+import {
+    ValidatorService,
+    LocationService
+} from './services';
 
 @NgModule({
-  declarations: [
-      AppComponent,
-      LoginComponent,
-      SignupComponent
-  ],
-  imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatButtonModule,
-      MatInputModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        SignupComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatRadioModule
+    ],
+    providers: [
+        ValidatorService,
+        LocationService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

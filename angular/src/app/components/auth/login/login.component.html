@@ -2,9 +2,9 @@
     <a class="auth-link" (click)="goToSignup()">Sign Up</a>
     <div class="form-container" style="padding-top:10px">
         <mat-form-field>
-            <input matInput placeholder="Username" formControlName="usernameControl" [(ngModel)]="user.username">
-            <mat-error *ngIf="loginForm.controls.usernameControl.hasError('required')">
-                Username is <strong>required</strong>
+            <input matInput placeholder="Email" formControlName="emailControl" [(ngModel)]="user.email">
+            <mat-error *ngIf="loginForm.controls.emailControl.hasError('required')">
+                Email is <strong>required</strong>
             </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -14,7 +14,9 @@
             </mat-error>
         </mat-form-field>
         <br/>
-        <button mat-raised-button (click)="onLoginClick()" [disabled]="!loginForm.valid">Login</button>
+        <div>
+            <button class="form-button" mat-raised-button (click)="onLoginClick()" [disabled]="!loginForm.valid">Login</button>
+        </div>
     </div>
 </form>
 

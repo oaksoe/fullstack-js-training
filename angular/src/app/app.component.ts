@@ -16,11 +16,11 @@ export class AppComponent {
     }
 
     public onLoginSuccess() {
-        console.log(this.user.username + " has logged in!");
+        console.log(this.user);
     }
 
     public onSignupSuccess() {
-        console.log(this.user.fullName + " has signed up!");
+        console.log(this.user);
     }
 
     public toggleAuth(toggleLogin) {

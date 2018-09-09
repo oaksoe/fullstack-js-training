@@ -1,8 +1,23 @@
-<div>
-    <input placeholder="Username" [(ngModel)]="user.username">
-    <input type="password" placeholder="Password" [(ngModel)]="user.password">
-    <button (click)="onLoginClick()">Login</button>
+<form [formGroup]="loginForm">
     <a class="auth-link" (click)="goToSignup()">Sign Up</a>
-</div>
+    <div class="form-container" style="padding-top:10px">
+        <mat-form-field>
+            <input matInput placeholder="Email" formControlName="emailControl" [(ngModel)]="user.email">
+            <mat-error *ngIf="loginForm.controls.emailControl.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="passwordControl" [(ngModel)]="user.password">
+            <mat-error *ngIf="loginForm.controls.passwordControl.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br/>
+        <div>
+            <button class="form-button" mat-raised-button (click)="onLoginClick()" [disabled]="!loginForm.valid">Login</button>
+        </div>
+    </div>
+</form>
 
 

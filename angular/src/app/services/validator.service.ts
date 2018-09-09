@@ -34,7 +34,7 @@ export class ValidatorService {
 
     public validateDOB(control: FormControl) {
         const today = new Date;
-        const isValid = !control || !control.value ? false : control.value >= today;
+        const isValid = !control || !control.value ? false : control.value <= today;
 
         return isValid ? null : {
             validateDOB: {

@@ -9,7 +9,7 @@
     "api" : {
         "secret": "this-is-our-secret",
         "bindAddress": "localhost",
-        "bindPort": 8090,
-        "publicAccessUrl": "http://localhost:8090"
+        "bindPort": 8000,
+        "publicAccessUrl": "http://localhost:8000"
     }
 }

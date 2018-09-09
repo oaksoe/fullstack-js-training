@@ -1,9 +1,8 @@
 exports.login = (req, res) => {
     var user = req.body;
-    console.log("sadfsafsafsfsf", user);
     
     global.db.user.findOne({
-        username: user.username
+        email: user.email
     }, (error, foundUser) => {
         if (error) {
             res.status(500).json({
@@ -11,11 +10,10 @@ exports.login = (req, res) => {
                 error: error
             });
         } else {
-            console.log("hiiiiiiiii whattttttttttt", foundUser);
             if (!foundUser) {
                 res.status(500).json({
                     status: "ERROR",
-                    error: "Username is invalid."
+                    error: "Email is invalid."
                 });
             } else {
                 if (user.password !== foundUser.password) {

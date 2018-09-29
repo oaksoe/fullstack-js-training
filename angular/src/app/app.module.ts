@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
     MatButtonModule,
@@ -19,7 +20,10 @@ import {
 } from './components';
 import {
     ValidatorService,
-    LocationService
+    LocationService,
+    HttpService,
+    AuthService,
+    UserApiService
 } from './services';
 
 @NgModule({
@@ -33,16 +37,20 @@ import {
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
         MatButtonModule,
         MatInputModule,
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatRadioModule
+        MatRadioModule,
     ],
     providers: [
         ValidatorService,
-        LocationService
+        LocationService,
+        HttpService,
+        AuthService,
+        UserApiService
     ],
     bootstrap: [AppComponent]
 })

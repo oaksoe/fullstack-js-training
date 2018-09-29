@@ -24,7 +24,7 @@ db.user.remove({})
 
 # 6. First Record Insertion
 use fs-training
-db.user.insert({'email': 'name@gmail.com', 'password': '123456'})
+db.user.save({'email': 'name@gmail.com', 'password': '123456'})
 
 Node API Server Setup
 =====================

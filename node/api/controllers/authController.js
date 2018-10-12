@@ -31,3 +31,21 @@ exports.login = (req, res) => {
         }
     });    
 }
+
+exports.signup = (req, res) => {
+    var user = req.body;
+    
+    global.db.user.insert(user, (error, result) => {
+        if (error) {
+            res.status(500).json({
+                status: "ERROR",
+                error: "Error while signingup. Details: DB Error."
+            });
+        } else {
+            res.status(200).json({
+                status: "SUCCESS",
+                data: result
+            });
+        }
+    });    
+}

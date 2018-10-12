@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { User } from '../../../models';
-import { ValidatorService, LocationService } from '../../../services';
+import { ValidatorService, LocationService, AuthService } from '../../../services';
 
 @Component({
     selector: 'app-signup',
@@ -26,7 +26,8 @@ export class SignupComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private validatorService: ValidatorService,
-        private locationService: LocationService
+        private locationService: LocationService,
+        private authService: AuthService
     ) {
     }
 
@@ -35,7 +36,14 @@ export class SignupComponent implements OnInit {
     }
 
     public onSignupClick() {
-        this.signupClick.emit();
+        this.authService.signup(this.user)
+            .subscribe(user => {
+                if(user) {
+                    this.signupClick.emit();
+                }
+            }, err => { 
+                console.log('Error');
+            });
     }
 
     public goToLogin() {

@@ -7,5 +7,6 @@ router.get('/', userController.findAll);
 router.get('/:username', userController.find);
 router.delete('/:username', userController.remove);
 router.put('/', userController.update);
+router.put('/', userController.updateAll);
 
 module.exports = router;

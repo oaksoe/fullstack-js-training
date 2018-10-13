@@ -20,8 +20,10 @@ app.use(cookieParser());
 
 //Routes
 var authRoute = require('./routes/authRoute');
+var userRoute = require('./routes/userRoute');
 
 app.use('/v1/fstraining/api/auth', authRoute);
+app.use('/v1/fstraining/api/user', userRoute);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

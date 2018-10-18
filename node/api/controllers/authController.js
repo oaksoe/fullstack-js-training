@@ -1,51 +1,52 @@
+var Promise = require('promise');
+var httpHelper = require('../helpers/http');
+
 exports.login = (req, res) => {
     var user = req.body;
     
-    global.db.user.findOne({
-        email: user.email
-    }, (error, foundUser) => {
-        if (error) {
-            res.status(500).json({
-                status: "ERROR",
-                error: error
-            });
-        } else {
-            if (!foundUser) {
-                res.status(500).json({
-                    status: "ERROR",
-                    error: "Email is invalid."
-                });
+    var dbLogin = (fulfill, reject) => {                        
+        global.db.user.findOne({
+            email: user.email
+        }, (error, foundUser) => {
+            if (error) {
+                reject(error);
             } else {
-                if (user.password !== foundUser.password) {
-                    res.status(500).json({
-                        status: "ERROR",
-                        error: "Password is invalid."
-                    });
+                if (!foundUser) {
+                    reject("Email is invalid.");
                 } else {
-                    res.status(200).json({
-                        status: "SUCCESS",
-                        data: foundUser
-                    });
+                    if (user.password !== foundUser.password) {
+                        reject("Password is invalid.");
+                    } else {
+                        fulfill(foundUser);
+                    }
                 }
             }
-        }
+        });
+    }
+
+    new Promise(dbLogin).then((result) => {
+        httpHelper.resResult(res, result);
+    }, (error) => {
+        httpHelper.resResult(res, error);
     });    
 }
 
 exports.signup = (req, res) => {
     var user = req.body;
-    
-    global.db.user.insert(user, (error, result) => {
-        if (error) {
-            res.status(500).json({
-                status: "ERROR",
-                error: "Error while signingup. Details: DB Error."
-            });
-        } else {
-            res.status(200).json({
-                status: "SUCCESS",
-                data: result
-            });
-        }
-    });    
+
+    var dbSignup = (fulfill, reject) => {
+        global.db.user.insert(user, (error, result) => {
+            if (error) {
+                reject("Error while signingup. Details: DB Error.");
+            } else {
+                fulfill(result);
+            }
+        });    
+    }
+
+    new Promise(dbSignup).then((result) => {
+        httpHelper.resResult(res, result);
+    }, (error) => {
+        httpHelper.resResult(res, error);
+    });
 }

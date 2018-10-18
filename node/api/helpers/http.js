@@ -14,3 +14,17 @@ exports.enableCORS = (req, res, next) => {
         next();
     }
 };
+
+exports.resResult = (res, result) => {
+    res.status(200).json({
+        status: "SUCCESS",
+        data: result
+    });
+}
+
+exports.resError = (res, message) => {
+    res.status(500).json({
+        status: "ERROR",
+        error: message
+    });
+}

@@ -9,12 +9,12 @@ exports.find = (req, res) => {
             email: user.email
         }, (error, user) => {
             if (error) {
-                reject(res, 'USER_NOT_FOUND');
+                reject('USER_NOT_FOUND');
             } else {
                 if (user) {
-                    fulfill(res, user);
+                    fulfill(user);
                 } else {
-                    reject(res, 'USER_NOT_FOUND');
+                    reject('USER_NOT_FOUND');
                 }
             }
         });
@@ -31,9 +31,9 @@ exports.findAll = (req, res) => {
     var dbFindAll = (fulfill, reject) => {
         global.db.user.find().toArray((error, result) => {
             if (error) {
-                reject(res, 'USER_FIND_ERROR');
+                reject('USER_FIND_ERROR');
             } else {
-                fulfill(res, result);
+                fulfill(result);
             }
         });
     }
@@ -51,9 +51,9 @@ exports.create = (req, res) => {
     var dbCreate = (fulfill, reject) => {
         global.db.user.insert(user, (error, result) => {
             if (error) {
-                reject(res, 'DB_ERROR');
+                reject('DB_ERROR');
             } else {
-                fulfill(res, result);
+                fulfill(result);
             }
         });
     }
@@ -75,9 +75,9 @@ exports.update = (req, res) => {
             $set: user
         }, (error, result) => {
             if (error) {
-                reject(res, 'USER_UPDATE_ERROR');
+                reject('USER_UPDATE_ERROR');
             } else {
-                fulfill(res, result);
+                fulfill(result);
             }
         });
     }
@@ -100,9 +100,9 @@ exports.updateAll = (req, res) => {
                 $set: user
             }, (error, result) => {
                 if (error) {
-                    reject(res, 'USER_UPDATE_ERROR');
+                    reject('USER_UPDATE_ERROR');
                 } else {
-                    fulfill(res, result);
+                    fulfill(result);
                 }
             });
         });
@@ -129,9 +129,9 @@ exports.remove = (req, res) => {
             username: user.username
         }, (error, result) => {
             if (error) {
-                reject(res, 'USER_REMOVE_ERROR');
+                reject('USER_REMOVE_ERROR');
             } else {
-                fulfill(res, result);
+                fulfill(result);
             }
         });
     }

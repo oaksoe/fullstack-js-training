@@ -25,7 +25,8 @@ exports.authenticateRequest = () => {
 				} else {
 					var email = decoded.email;
 					console.log("module.authentication: authToken contains:" + email);
-					
+                    
+                    // Further validations can be done here. Eg. check if the user (email) exists
 					req.email = email;
 					next();
 				}

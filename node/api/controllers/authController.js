@@ -1,5 +1,6 @@
 var Promise = require('promise');
 var httpHelper = require('../helpers/http');
+var authHelper = require('../helpers/auth');
 
 exports.login = (req, res) => {
     var user = req.body;
@@ -24,11 +25,15 @@ exports.login = (req, res) => {
         });
     }
 
-    new Promise(dbLogin).then((result) => {
-        httpHelper.resResult(res, result);
-    }, (error) => {
-        httpHelper.resResult(res, error);
-    });    
+    new Promise(dbLogin)
+        .then((user) => { 
+            return new Promise((fulfill, reject) => {
+                var token = authHelper.signUser(user.email);
+                user.credentials = token;
+                fulfill(user);
+            });
+         }, (error) => { httpHelper.resResult(res, error); })
+        .then((result) => { httpHelper.resResult(res, result); }, (error) => { httpHelper.resResult(res, error); });    
 }
 
 exports.signup = (req, res) => {

@@ -1,27 +1,36 @@
-# Angular
+Using Angular Materials
+=======================
+https://material.angular.io/guide/getting-started
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+npm install @angular/materials @angular/cdk @angular/animations --save
 
-## Development server
+# Import these modules in app.module.ts
+BrowserAnimationsModule, ReactiveFormsModule, MatInputModule, MatButtonModule
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    MatInputModule,
+    MatButtonModule
+    // more material components here
+} from '@angular/material';
 
-## Code scaffolding
+imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatInputModule,
+      MatButtonModule
+  ]
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# For theme, in styles.css,
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Using Angular Material Design Icons
+===================================
 
-## Running unit tests
+http://google.github.io/material-design-icons/ 
+https://material.io/icons/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
